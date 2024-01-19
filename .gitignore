@@ -1,0 +1,26 @@
+# Ignore training data, they must be added to our data-model-registry
+# You can track metadata and small files by adding them here, for example
+# if you have a file `data/metadata.txt`that you want to track with git,
+# just add `!data/metadata.txt` (the `!` tells git to not ignore the file)
+data/*
+!data/README.md
+
+# Ignore models, they must be added to our data-model-registry
+models/*
+!models/README.md
+!models/*.dvc.env
+
+# Python virtuelenv
+.venv
+
+# Python
+__pycache__/
+**/__pycache__/
+
+# Pytest
+.pytest_cache/
+**/.pytest_cache/
+
+# Ruff
+.ruff_cache/
+**/.ruff_cache/

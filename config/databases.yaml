@@ -1,0 +1,9 @@
+local_db:
+  type: mysql
+  host: localhost
+  port: 3306
+  protected:
+    database: db
+    user: user
+    password: passwd
+  secret: name_db

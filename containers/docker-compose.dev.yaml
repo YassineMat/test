@@ -1,0 +1,35 @@
+---
+version: "3.8"
+
+services:
+
+  dev-container:
+    build:
+      context: ..
+      dockerfile: containers/Dockerfile.dev
+
+    # REMPLACER `template` LE NOM DE VOTRE PROJET
+    container_name: devc-template-${USER}
+
+    # REMPLACER `template` LE NOM DE VOTRE PROJET
+    image: devc-template:user-${USER}
+    pull_policy: build
+    volumes:
+      - ${HOME}:${HOME}
+    ports:
+      - "8010:8080"
+    working_dir: ${PWD}
+    command: tail -f /dev/null
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    devices:
+      - /dev/nvidia0:/dev/nvidia0
+      - /dev/nvidiactl:/dev/nvidiactl
+      - /dev/nvidia-modeset:/dev/nvidia-modeset
+      - /dev/nvidia-uvm:/dev/nvidia-uvm
+      - /dev/nvidia-uvm-tools:/dev/nvidia-uvm-tools

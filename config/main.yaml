@@ -1,0 +1,3 @@
+vars:
+  greeting_message: "Hello world, I document my code well, I use static typing and I configure my python project with Hydra!"
+  iteration: 6

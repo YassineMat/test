@@ -1,0 +1,30 @@
+# Make sure that CUDA version in the image and on the GPU server are the same !!!!
+FROM nvidia/cuda:12.0.0-base-ubuntu20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install the cv2 dependencies and sudo
+RUN apt-get update \
+    && apt-get install -y \
+    lsb-core \
+    python3 \
+    python3-pip \
+    python3-venv \
+    git \
+    ffmpeg libsm6 libxext6
+
+# Install Microsoft SQL ODBC driver
+COPY --chmod=0500 ./scripts/install_Microsoft_ODBC_18.sh ./setup/
+RUN ./setup/install_Microsoft_ODBC_18.sh
+
+# Set temp working directory
+WORKDIR /root
+COPY containers/cache/.gitconfig .
+COPY containers/cache/.ssh .ssh
+
+# Inform which internal ports are used
+EXPOSE 8000
+EXPOSE 5000
+
+# Loop comand to keep the container running
+ENTRYPOINT ["tail", "-f", "/dev/null"]
